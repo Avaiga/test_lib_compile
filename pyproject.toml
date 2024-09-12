@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "testlib"
+version = "0.1.0"
+description = "A basic Python library with LinkedList and BinaryTree data structures"
+authors = [
+    { name="Joao Andre", email="joao.dasilva@taipy.io" }
+]
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+homepage = "https://github.com/Avaiga/test_lib_compile"
+repository = "https://github.com/Avaiga/test_lib_compile"
+documentation = "https://github.com/Avaiga/test_lib_compile"
+
+[tool.setuptools.package-data]
+testlib = ["*"]

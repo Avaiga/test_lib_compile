@@ -1,0 +1,53 @@
+name: Publish a new package
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "The package version to create (ex: 1.0.0)"
+        required: true
+
+permissions:
+    id-token: write
+    contents: read
+
+jobs:
+  test-package:
+    timeout-minutes: 20
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.8
+
+  build-and-publish:
+    timeout-minutes: 20
+    runs-on: ubuntu-latest
+    environment: publish
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: test python
+        run: |
+          sudo apt install -y software-properties-common
+          sudo add-apt-repository ppa:deadsnakes/ppa
+          sudo apt install python3.8 -y
+          sudo apt install python3.9 -y
+          sudo apt install python3.10 -y
+          sudo apt install python3.11 -y
+          sudo apt install python3.12 -y
+          sudo apt install -y python3.8-distutils python3.9-distutils python3.10-distutils python3.11-distutils python3.12-distutils
+
+      - name: Publish
+        run: |
+          bash tools/publish.sh
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: libtest_build
+          path: dist

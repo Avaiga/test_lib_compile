@@ -1,0 +1,7 @@
+recursive-include src *.pyc *.pyi
+include testlib-3.8.zip
+include testlib-3.9.zip
+include testlib-3.10.zip
+include testlib-3.11.zip
+include testlib-3.12.zip
+include testlib/core/*.json
